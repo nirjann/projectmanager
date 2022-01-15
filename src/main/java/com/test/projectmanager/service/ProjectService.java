@@ -42,7 +42,7 @@ public class ProjectService implements IProjectService {
 
     @Override
     public Project updateProject(Long id, Project updateData) {
-        updateData.setId(id);
+        updateData.setProjectId(id);
         return projectRepo.save(updateData);
     }
 

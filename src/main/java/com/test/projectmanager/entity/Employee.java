@@ -1,10 +1,8 @@
 package com.test.projectmanager.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,18 +21,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "projectId")
-public class Project {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "employeeId")
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long projectId;
+    private Long employeeId;
     private String name;
+    private String role;
+    private String email;
 
-    @Column(nullable = true)
-    private Date dueDate;
-    private String manager;
-
-    @ManyToMany(targetEntity = Employee.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-
-    private List<Employee> employees;
+    @ManyToMany(targetEntity = Project.class, mappedBy = "employees", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<Project> projects;
 }
